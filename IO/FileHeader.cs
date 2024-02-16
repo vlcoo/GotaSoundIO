@@ -1,68 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace GotaSoundIO.IO;
 
-namespace GotaSoundIO.IO {
+/// <summary>
+///     File header.
+/// </summary>
+public abstract class FileHeader : IReadable, IWriteable
+{
+    /// <summary>
+    ///     Block offsets.
+    /// </summary>
+    public long[] BlockOffsets;
 
     /// <summary>
-    /// File header.
+    ///     Block sizes.
     /// </summary>
-    public abstract class FileHeader : IReadable, IWriteable {
+    public long[] BlockSizes;
 
-        /// <summary>
-        /// Magic.
-        /// </summary>
-        public string Magic;
+    /// <summary>
+    ///     Block types.
+    /// </summary>
+    public long[] BlockTypes;
 
-        /// <summary>
-        /// Byte order.
-        /// </summary>
-        public ByteOrder ByteOrder;
+    /// <summary>
+    ///     Byte order.
+    /// </summary>
+    public ByteOrder ByteOrder;
 
-        /// <summary>
-        /// Version.
-        /// </summary>
-        public Version Version;
+    /// <summary>
+    ///     File size.
+    /// </summary>
+    public long FileSize;
 
-        /// <summary>
-        /// Block types.
-        /// </summary>
-        public long[] BlockTypes;
+    /// <summary>
+    ///     Header size.
+    /// </summary>
+    public long HeaderSize;
 
-        /// <summary>
-        /// Block offsets.
-        /// </summary>
-        public long[] BlockOffsets;
+    /// <summary>
+    ///     Magic.
+    /// </summary>
+    public string Magic;
 
-        /// <summary>
-        /// Block sizes.
-        /// </summary>
-        public long[] BlockSizes;
+    /// <summary>
+    ///     Version.
+    /// </summary>
+    public Version Version;
 
-        /// <summary>
-        /// File size.
-        /// </summary>
-        public long FileSize;
+    /// <summary>
+    ///     Read a header.
+    /// </summary>
+    /// <param name="r">The reader.</param>
+    public abstract void Read(FileReader r);
 
-        /// <summary>
-        /// Header size.
-        /// </summary>
-        public long HeaderSize;
-
-        /// <summary>
-        /// Read a header.
-        /// </summary>
-        /// <param name="r">The reader.</param>
-        public abstract void Read(FileReader r);
-
-        /// <summary>
-        /// Write a header.
-        /// </summary>
-        /// <param name="w">The writer.</param>
-        public abstract void Write(FileWriter w);
-
-    }
-
+    /// <summary>
+    ///     Write a header.
+    /// </summary>
+    /// <param name="w">The writer.</param>
+    public abstract void Write(FileWriter w);
 }
